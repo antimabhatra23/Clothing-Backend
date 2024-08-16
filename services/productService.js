@@ -8,7 +8,6 @@ const addProduct = async (
   price,
   category,
   size,
-  rating
 ) => {
   const product = new Product({
     name,
@@ -17,8 +16,7 @@ const addProduct = async (
     img,
     price : parseInt(price),
     category,
-    size,
-    rating
+    size
   });
 
   await product.save();

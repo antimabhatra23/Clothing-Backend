@@ -14,8 +14,8 @@ const addProduct = async (req, res) => {
     try {
       console.log(fields)
 
-      const { name, color, description, price, category, size, rating } = fields;
-      console.log({name , color ,description, price, category, size, rating })
+      const { name, color, description, price, category, size } = fields;
+      console.log({name , color ,description, price, category, size})
       let img = null;
 
       if (files.img) {
@@ -23,8 +23,6 @@ const addProduct = async (req, res) => {
         const imgBuffer = fs.readFileSync(files.img[0].filepath);
         img = `data:${files.img[0].mimetype};base64,${imgBuffer.toString('base64')}`;
       }
-
-
       console.log({img})
 
       if (img && !img.startsWith('data:image')) {
@@ -39,11 +37,10 @@ const addProduct = async (req, res) => {
         price[0],
         category[0],
         size[0],
-        rating[0]
       );
       res.status(201).send(response);
     } catch (error) {
-      console.error('Product saving error:', error); // Log the error for debugging
+      console.log({error}) // Log the error for debugging
       res.status(400).send({ error: 'Failed to add product' });
     }
   });
@@ -71,3 +68,4 @@ module.exports = {
   addProduct,
   getProducts,
 };
+
